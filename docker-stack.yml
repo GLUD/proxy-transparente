@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+  proxy:
+    image: ubuntu:17.04
+    networks:
+      - external
+      - internal
+
+    volumes:
+      data:/home
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+ cliente:
+    image: ubuntu:17.04
+    networks:
+      - internal
+ cliente:
+    image: centos
+    networks:
+      - internal
+
+
+networks:
+  internal:
+  external:
+
+volumes:
+  data:
