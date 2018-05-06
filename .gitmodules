@@ -1,0 +1,3 @@
+[submodule "go-any-proxy"]
+	path = go-any-proxy
+	url = https://github.com/ryanchapman/go-any-proxy

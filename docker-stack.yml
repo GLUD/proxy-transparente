@@ -2,30 +2,42 @@ version: "3"
 
 services:
   proxy:
-    image: ubuntu:17.04
+    image: glud/transproxy:latest
     networks:
-      - external
-      - internal
-
-    volumes:
-      data:/home
+      - outside
+      - inside
+    environment:
+      PROXY_HOSTS: 10.20.4.15:3128
+      TRANSPARENT_PROXY_PORT: :3128
+#    volumes:
+#      data:/home
     deploy:
       restart_policy:
         condition: on-failure
         delay: 5s
- cliente:
-    image: ubuntu:17.04
-    networks:
-      - internal
- cliente:
-    image: centos
-    networks:
-      - internal
+    cap_add:
+      - NET_ADMIN
 
+  cliente1:
+     image: glud/testubuntu:latest
+     command: tail -f /dev/null
+     networks:
+       - inside
+     cap_add:
+       - NET_ADMIN
+ 
+  cliente2:
+     image: centos
+     command: tail -f /dev/null
+     networks:
+       - inside
+     cap_add:
+       - NET_ADMIN
 
 networks:
-  internal:
-  external:
+  inside:
+    internal: true
+  outside:
 
 volumes:
   data:
