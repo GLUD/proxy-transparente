@@ -6,3 +6,6 @@ para iniciar el stack de Docker:
 # docker swarm init
 # docker stack deploy -c docker-stack.yml proxy-transparente
 ```
+
+## Requerimientos
+- docker: ^1.13.0

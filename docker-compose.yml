@@ -1,0 +1,26 @@
+version: '2'
+services:
+  proxy:
+    build: .
+    ports:
+      - "3128:3128"
+    networks:
+      - external
+      - internal
+    volumes:
+      - data:/data
+  cliente:
+    image: ubuntu:17.04
+    networks:
+      - internal
+  cliente2:
+    image: centos
+    networks:
+      - internal
+
+networks:
+  internal:
+  external:
+
+volumes:
+  data:
